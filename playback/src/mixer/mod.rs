@@ -18,12 +18,16 @@ pub trait AudioFilter {
 pub mod softmixer;
 use self::softmixer::SoftMixer;
 
+pub mod nullmixer;
+use self::nullmixer::NullMixer;
+
 fn mk_sink<M: Mixer + 'static>() -> Box<Mixer> {
     Box::new(M::open())
 }
 
 pub fn find<T: AsRef<str>>(name: Option<T>) -> Option<fn() -> Box<Mixer>> {
     match name.as_ref().map(AsRef::as_ref) {
+        Some("null") => Some(mk_sink::<NullMixer>),
         None | Some("softvol") => Some(mk_sink::<SoftMixer>),
         _ => None,
     }
