@@ -238,6 +238,7 @@ impl Spirc {
         let linear_volume = config.linear_volume;
 
         let device = initial_device_state(config);
+        player.volume(volume);
 
         let mut task = SpircTask {
             player: player,
@@ -724,6 +725,7 @@ impl SpircTask {
     fn set_volume(&mut self, volume: u16) {
         self.device.set_volume(volume as u32);
         self.mixer.set_volume(volume_to_mixer(volume, self.linear_volume));
+        self.player.volume(volume);
         if let Some(cache) = self.session.cache() {
             cache.save_volume(Volume { volume })
         }

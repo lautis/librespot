@@ -43,6 +43,7 @@ enum PlayerCommand {
     Pause,
     Stop,
     Seek(u32),
+    Volume(u16),
 }
 
 #[derive(Debug, Clone)]
@@ -59,6 +60,10 @@ pub enum PlayerEvent {
     Stopped {
         track_id: SpotifyId,
     },
+
+    Volume {
+        volume: u16
+    }
 }
 
 type PlayerEventChannel = futures::sync::mpsc::UnboundedReceiver<PlayerEvent>;
@@ -174,6 +179,10 @@ impl Player {
 
     pub fn stop(&self) {
         self.command(PlayerCommand::Stop)
+    }
+
+    pub fn volume(&self, volume: u16) {
+        self.command(PlayerCommand::Volume(volume))
     }
 
     pub fn seek(&self, position_ms: u32) {
@@ -470,6 +479,11 @@ impl PlayerInternal {
                 }
             }
 
+            PlayerCommand::Volume(volume) => {
+                warn!("Player::Volume changed to {}", volume);
+                self.send_event(PlayerEvent::Volume { volume });
+            }
+
             PlayerCommand::Play => {
                 if let PlayerState::Paused { track_id, .. } = self.state {
                     self.state.paused_to_playing();
@@ -610,6 +624,7 @@ impl ::std::fmt::Debug for PlayerCommand {
             PlayerCommand::Pause => f.debug_tuple("Pause").finish(),
             PlayerCommand::Stop => f.debug_tuple("Stop").finish(),
             PlayerCommand::Seek(position) => f.debug_tuple("Seek").field(&position).finish(),
+            PlayerCommand::Volume(volume) => f.debug_tuple("Volume").field(&volume).finish(),
         }
     }
 }

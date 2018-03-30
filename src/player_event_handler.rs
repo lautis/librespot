@@ -32,6 +32,10 @@ pub fn run_program_on_events(event: PlayerEvent, onevent: &str) -> io::Result<Ch
             env_vars.insert("PLAYER_EVENT", "stop".to_string());
             env_vars.insert("TRACK_ID", track_id.to_base62());
         }
+        PlayerEvent::Volume { volume } => {
+            env_vars.insert("PLAYER_EVENT", "volume".to_string());
+            env_vars.insert("VOLUME", volume.to_string());
+        }
     }
     run_program(onevent, env_vars)
 }
