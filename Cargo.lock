@@ -8,8 +8,8 @@ dependencies = [
 
 [[package]]
 name = "alsa"
-version = "0.2.0"
-source = "git+https://github.com/diwic/alsa-rs.git#9de0b82e814c9c71a389f8e47c655569f64925b5"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "alsa-sys 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "bitflags 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -505,7 +505,7 @@ dependencies = [
 name = "librespot-playback"
 version = "0.1.0"
 dependencies = [
- "alsa 0.2.0 (git+https://github.com/diwic/alsa-rs.git)",
+ "alsa 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "byteorder 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "futures 0.1.21 (registry+https://github.com/rust-lang/crates.io-index)",
  "jack 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1547,7 +1547,7 @@ dependencies = [
 
 [metadata]
 "checksum aho-corasick 0.6.4 (registry+https://github.com/rust-lang/crates.io-index)" = "d6531d44de723825aa81398a6415283229725a00fa30713812ab9323faa82fc4"
-"checksum alsa 0.2.0 (git+https://github.com/diwic/alsa-rs.git)" = "<none>"
+"checksum alsa 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "8fd5a75e70d45a943d2a0a818277e71d6ff777e97358529d6b460d3d4c4d0745"
 "checksum alsa-sys 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "b0edcbbf9ef68f15ae1b620f722180b82a98b6f0628d30baa6b8d2a5abc87d58"
 "checksum arrayvec 0.4.7 (registry+https://github.com/rust-lang/crates.io-index)" = "a1e964f9e24d588183fcb43503abda40d288c8657dfc27311516ce2f05675aef"
 "checksum base64 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "30e93c03064e7590d0466209155251b90c22e37fab1daf2771582598b5827557"
